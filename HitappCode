@@ -1,0 +1,670 @@
+<html>
+<head>
+    <meta content="text/html; charset=utf-8" />
+    <style type="text/css">
+        .mainContent thead tr td {
+            padding-top: 10px;
+            padding-bottom: 10px;
+        }
+
+        .bodyText {
+            font-family: Arial;
+            color: #404040;
+        }
+
+        .tableTitle {
+            font-size: large;
+            font-weight: bold;
+        }
+
+        ol {
+        }
+
+        .mainContentTitle {
+            font-size: large;
+            background-color: #efefef;
+        }
+
+        .mainContent {
+            color: #404040;
+            border: 1px dotted #ddd;
+            color: #404040;
+            font-family: Arial;
+            font-size: 10pt;
+            line-height: 24px;
+        }
+
+        .mainLeft {
+            width: 55%;
+        }
+
+        .mainMiddle {
+            width: 20%;
+        }
+
+        .mainRight {
+            width: 20%;
+        }
+
+        .clear {
+            clear: both;
+        }
+
+        .title {
+            border: 1px dotted #ddd;
+            background-color: #efefef;
+            font-size: x-large;
+            margin-top: 15px;
+            padding-left: 15px;
+            padding-top: 5px;
+            padding-bottom: 5px;
+            display: block;
+            TEXT-ALIGN: center;
+        }
+
+        .subtitle {
+            font-style: italic;
+            text-decoration: underline;
+        }
+
+        .text {
+        }
+
+        .noshow {
+            visibility: collapse;
+            display: none;
+        }
+
+        .text2 {
+            font-family: Arial;
+            font-size: 10pt;
+            padding-left: 10px;
+            padding-left: 10px;
+            padding-top: 5px;
+            padding-bottom: 5px;
+            display: block;
+            line-height: 18px;
+        }
+
+        .leftRail {
+            vertical-align: top;
+            width: 35%;
+        }
+
+        .rightRail {
+            vertical-align: top;
+        }
+
+        .emphasize {
+            font-weight: bold;
+            font-style: italic;
+            color: blue;
+        }
+
+        #description {
+            margin-top: 10px;
+        }
+
+        #QueryDescription {
+            padding-right: 20px;
+            width: 40%;
+            float: left;
+        }
+
+        #TopicDescription {
+            width: 40%;
+            float: left;
+        }
+
+        #mainArticles ol {
+            list-style-type: none;
+        }
+
+        .JudgeNoteSub {
+            font-style: italic;
+            list-style: square;
+        }
+    </style>
+    <script type="text/javascript" src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.2.min.js"></script>
+    <script type="text/javascript">
+        //////////////////////////////////// Begin of system functions
+
+        /////////////////////////////////////////////////
+            function xPlate_GoForward() {
+                var control = top.document.getElementById('silverlightControl');
+                control.Content.MainPage.GoForwardFromJavascript();
+            };
+            function xPlate_Skip() {
+                var control = top.document.getElementById('silverlightControl');
+                control.Content.MainPage.SkipFromJavascript();
+            };
+            function xPlate_GoBack() {
+                var control = top.document.getElementById('silverlightControl');
+                control.Content.MainPage.GoBackFromJavascript();
+            };
+            function xPlate_Validate() {
+                // check radio buttons
+                return true && JudgeRelevanceAndCategory.Validate();
+	
+            };
+            function xPlate_SubmitFeedback(appeal) {
+                if (appeal && document.getElementById('xPlate_audit_comment').value == "") {
+                alert("Please provide your comment first.");
+                    return;
+                }
+                var control = top.document.getElementById('silverlightControl');
+                control.Content.MainPage.SubmitFeedbackFromJavascript(appeal);
+            };
+
+            function xPlate_SubmitAudit() {
+                if (document.getElementById('xPlate_audit_comment').value == "") {
+                    alert("Please provide your comment first.");
+                    return;
+                }
+                xPlate_GoForward();
+            };
+
+            function xPlate_SetJudgmentDataInt(i) {
+                var control = top.document.getElementById('silverlightControl');
+                control.Content.MainPage.SetJudgmentDataIntFromJavascript('', i);
+            };
+
+            function SetJudgment(i) {
+                xPlate_SetJudgmentDataInt(i);
+            };
+
+            function onSubmit() {
+                if (!hasValue("image_judgment")) {
+                    alert("Please give judgment");
+                    return;
+                }
+                xPlate_GoForward();
+            }
+
+            function hasValue(name) {
+                var items = document.getElementsByName(name);
+                for (var i = 0; i < items.length; i++) {
+                    if (items.item(i).checked) {
+                        return true;
+                    }
+                }
+                return false;
+            }
+
+            function xPlate_OnLoad() {
+                var i = 0;
+                var tr1 = $('#tableRow1');
+                var url1 = $('#imageurl1');
+                var title1 = $('#docTitle1');
+                if ( url1.text() == null || url1.text().trim() == "-"){
+                    tr1.hide();
+                    i = i + 1;
+                }
+                var tr2 = $('#tableRow2');
+                var url2 = $('#imageurl2');
+                var title2 = $('#docTitle2');
+                if ( url2.text() == null || url2.text().trim() == "-"){
+                    tr2.hide();
+                    i = i + 1;
+                }
+                var tr3 = $('#tableRow3');
+                var url3 = $('#imageurl3');
+                var title3 = $('#docTitle3');
+                if ( url3.text() == null || url3.text().trim() == "-"){
+                    tr3.hide();
+                    i = i + 1;
+                }
+                var tr4 = $('#tableRow4');
+                if (i >= 2)
+                {
+                    tr4.hide();
+                }
+            };
+            //////////////////////////////////// End of system functions
+    </script>
+
+    <style type="text/css" id="base_style">
+        body {
+            margin: 0;
+        }
+
+        .lyt_h {
+            clear: both;
+        }
+
+        .lyt_el {
+        }
+
+        .lyt_lr {
+            position: relative;
+        }
+
+            .lyt_lr .lyt_left {
+                float: left;
+                width: 50%;
+            }
+
+            .lyt_lr .lyt_right {
+                float: right;
+                width: 50%;
+            }
+
+        .lyt_tb {
+        }
+
+            .lyt_tb .lyt_top {
+            }
+
+            .lyt_tb .lyt_bottom {
+                clear: both;
+            }
+    </style>
+</head>
+
+<body style="width: 100%; height: 100%; margin: 0px; overflow: auto" class="bodyText">
+    <div align="left">
+        <div class="title">
+			<div style="font-size:18px">
+				<p>
+					Judgement note:
+				<br>	Pls read the article and 7 outputs/different summaries for each article. Pls give us your feedback for each output to help us improve our summarization model.
+				<br>	1.	For readable part, if it’s readable and fluent, pls select “Yes”. If not, pls select “No” and give us the reason, “bad grammar” or “undone phrasing” 
+				<br>	2.	For relevant part, if it’s relevant (correct info and it’s a good summary of the whole article), pls select “cover the whole article”. 
+				<br>	If it missed some information, pls select “cover part of the article”.
+				<br>	If it’s cover part of the article at all, pls select “cover part of the article”.
+				</p>
+			</div>
+        </div>
+            <p><center>{Textbody}</center></p>
+
+    </div>
+
+    <div>
+        <table id="mainArticles" class="mainContent" border="1" cellspacing="0" , style="width: 100%;">
+            <colgroup>
+                <col span="1" style="width: 50%;">
+                <col span="1" style="width: 50%;">
+            </colgroup>
+            <thead class="mainContentTitle">
+                <tr>
+                    <td class="mainLeft">Summary</td>
+                    <td class="mainMiddle">Label</td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr id="tableRow1">
+                    <td>
+                        <div style="margin-top:15px;">
+                            <table align="left">
+                                <tr>
+                                    <td>
+                                        <a>{OutputbyKaiZheng}</a>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </td>
+                    <td>
+                        <table border="0" cellspacing="0" style="width: 100%; height: 100%;" cellpadding="10">
+
+                            <ol>
+								<tr>
+									<td style="background-color:LightGray;">
+										<input id="Judgment1_Good" name="JudgmentRelevance1" type="radio" value="1_good" />Readable
+									</td>
+								</tr>
+								<tr>
+									<td style="background-color:LightSlateGray ;">
+                                        &nbsp&nbsp<input id="Judgment1_Good" name="Judgment1" type="radio" value="1_good" /><font size="2">Yes</font></br>
+                                        &nbsp&nbsp<input id="Judgment1_Good" name="Judgment1" type="radio" value="1_good" /><font size="2">bad grammar</font></br>
+                                        &nbsp&nbsp<input id="Judgment1_Good" name="Judgment1" type="radio" value="1_good" /><font size="2">undone phrasing</font></br>
+                                        
+                                    </td>
+                                </tr> 
+                                <tr>
+                                    <td style="background-color:DarkGray ;">
+                                        <input id="Judgment1_Bad" name="JudgmentRelevance1" type="radio" value="1_bad" />Relevence
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="background-color:LightSlateGray ;">
+                                        &nbsp&nbsp<input id="Judgment1_Bad1" name="Judgment1" type="radio" value="1_badfluency" /><font size="2">cover the whole article</font></br>
+                                        &nbsp&nbsp<input id="Judgment1_Bad2" name="Judgment1" type="radio" value="1_notrelevant" /><font size="2">cover part of the article</font></br>
+                                        &nbsp&nbsp<input id="Judgment1_Bad3" name="Judgment1" type="radio" value="1_notuseful" /><font size="2">not relevant</font></br>
+                                        
+                                    </td>
+                                </tr>
+                            </ol>
+                        </table>
+                    </td>
+                </tr>
+                <tr id="tableRow2">
+                    <td>
+                        <div style="margin-top:15px;">
+                            <table align="left">
+                                <tr>
+                                    <td>
+                                        &nbsp&nbsp<a id="docTitle1" target="_blank">{OutputbySummarizebotOrigin}</a>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </td>
+                    <td>
+                        <table border="0" cellspacing="0" style="width: 100%; height: 100%;" cellpadding="10">
+                            <ol>
+                                <tr>
+									<td style="background-color:LightGray;">
+										<input id="Judgment2_Good" name="JudgmentRelevance1" type="radio" value="1_good" />Readable
+									</td>
+								</tr>
+								<tr>
+									<td style="background-color:LightSlateGray ;">
+                                        &nbsp&nbsp<input id="Judgment2_Good" name="Judgment2" type="radio" value="1_good" /><font size="2">Yes</font></br>
+                                        &nbsp&nbsp<input id="Judgment2_Good" name="Judgment2" type="radio" value="1_good" /><font size="2">bad grammar</font></br>
+                                        &nbsp&nbsp<input id="Judgment2_Good" name="Judgment2" type="radio" value="1_good" /><font size="2">undone phrasing</font></br>
+                                        
+                                    </td>
+                                </tr> 
+                                <tr>
+                                    <td style="background-color:DarkGray ;">
+                                        <input id="Judgment2_Bad" name="JudgmentRelevance1" type="radio" value="1_bad" />Relevence
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="background-color:LightSlateGray ;">
+                                        &nbsp&nbsp<input id="Judgment2_Bad1" name="Judgment2" type="radio" value="1_badfluency" /><font size="2">cover the whole article</font></br>
+                                        &nbsp&nbsp<input id="Judgment2_Bad2" name="Judgment2" type="radio" value="1_notrelevant" /><font size="2">cover part of the article</font></br>
+                                        &nbsp&nbsp<input id="Judgment2_Bad3" name="Judgment2" type="radio" value="1_notuseful" /><font size="2">not relevant</font></br>
+                                        
+                                    </td>
+                                </tr>
+                            </ol>
+                        </table>
+                    </td>
+                </tr>
+                <tr id="tableRow3">
+                    <td>
+                        <div style="margin-top:15px;">
+                            <table align="left">
+                                <tr>
+                                    <td>
+                                        &nbsp&nbsp<a id="docTitle1" target="_blank">{SummarizebotReduction}</a>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </td>
+                    <td>
+                        <table border="0" cellspacing="0" style="width: 100%; height: 100%;" cellpadding="10">
+                            <ol>
+                                <tr>
+									<td style="background-color:LightGray;">
+										<input id="Judgment3_Good" name="JudgmentRelevance1" type="radio" value="1_good" />Readable
+									</td>
+								</tr>
+								<tr>
+									<td style="background-color:LightSlateGray ;">
+                                        &nbsp&nbsp<input id="Judgment3_Good" name="Judgment3" type="radio" value="1_good" /><font size="2">Yes</font></br>
+                                        &nbsp&nbsp<input id="Judgment3_Good" name="Judgment3" type="radio" value="1_good" /><font size="2">bad grammar</font></br>
+                                        &nbsp&nbsp<input id="Judgment3_Good" name="Judgment3" type="radio" value="1_good" /><font size="2">undone phrasing</font></br>
+                                        
+                                    </td>
+                                </tr> 
+                                <tr>
+                                    <td style="background-color:DarkGray ;">
+                                        <input id="Judgment3_Bad" name="JudgmentRelevance1" type="radio" value="1_bad" />Relevence
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="background-color:LightSlateGray ;">
+                                        &nbsp&nbsp<input id="Judgment3_Bad1" name="Judgment3" type="radio" value="1_badfluency" /><font size="2">cover the whole article</font></br>
+                                        &nbsp&nbsp<input id="Judgment3_Bad2" name="Judgment3" type="radio" value="1_notrelevant" /><font size="2">cover part of the article</font></br>
+                                        &nbsp&nbsp<input id="Judgment3_Bad3" name="Judgment3" type="radio" value="1_notuseful" /><font size="2">not relevant</font></br>
+                                        
+                                    </td>
+                                </tr>
+                            </ol>
+                        </table>
+                    </td>
+                </tr>
+                <tr id="tableRow4">
+                    <td>
+                        <div style="margin-top:15px;">
+                            <table align="left">
+                                <tr>
+                                    <td>
+                                        &nbsp&nbsp<a id="docTitle1" target="_blank">{yigxi_p_g_first200char}</a>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </td>
+                    <td>
+                        <table border="0" cellspacing="0" style="width: 100%; height: 100%;" cellpadding="10">
+                            <ol>
+                                <tr>
+									<td style="background-color:LightGray;">
+										<input id="Judgment4_Good" name="JudgmentRelevance1" type="radio" value="1_good" />Readable
+									</td>
+								</tr>
+								<tr>
+									<td style="background-color:LightSlateGray ;">
+                                        &nbsp&nbsp<input id="Judgment4_Good" name="Judgment4" type="radio" value="1_good" /><font size="2">Yes</font></br>
+                                        &nbsp&nbsp<input id="Judgment4_Good" name="Judgment4" type="radio" value="1_good" /><font size="2">bad grammar</font></br>
+                                        &nbsp&nbsp<input id="Judgment4_Good" name="Judgment4" type="radio" value="1_good" /><font size="2">undone phrasing</font></br>
+                                        
+                                    </td>
+                                </tr> 
+                                <tr>
+                                    <td style="background-color:DarkGray ;">
+                                        <input id="Judgment4_Bad" name="JudgmentRelevance1" type="radio" value="1_bad" />Relevence
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="background-color:LightSlateGray ;">
+                                        &nbsp&nbsp<input id="Judgment4_Bad1" name="Judgment4" type="radio" value="1_badfluency" /><font size="2">cover the whole article</font></br>
+                                        &nbsp&nbsp<input id="Judgment4_Bad2" name="Judgment4" type="radio" value="1_notrelevant" /><font size="2">cover part of the article</font></br>
+                                        &nbsp&nbsp<input id="Judgment4_Bad3" name="Judgment4" type="radio" value="1_notuseful" /><font size="2">not relevant</font></br>
+                                        
+                                    </td>
+                                </tr>
+                            </ol>
+                        </table>
+                    </td>
+                </tr>
+                <tr id="tableRow5">
+                    <td>
+                        <div style="margin-top:15px;">
+                            <table align="left">
+                                <tr>
+                                    <td>
+                                        &nbsp&nbsp<a id="docTitle1" target="_blank">{yingxi_re_first200char}</a>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </td>
+                    <td>
+                        <table border="0" cellspacing="0" style="width: 100%; height: 100%;" cellpadding="10">
+                            <ol>
+                                <tr>
+									<td style="background-color:LightGray;">
+										<input id="Judgment5_Good" name="JudgmentRelevance1" type="radio" value="1_good" />Readable
+									</td>
+								</tr>
+								<tr>
+									<td style="background-color:LightSlateGray ;">
+                                        &nbsp&nbsp<input id="Judgment5_Good" name="Judgment5" type="radio" value="1_good" /><font size="2">Yes</font></br>
+                                        &nbsp&nbsp<input id="Judgment5_Good" name="Judgment5" type="radio" value="1_good" /><font size="2">bad grammar</font></br>
+                                        &nbsp&nbsp<input id="Judgment5_Good" name="Judgment5" type="radio" value="1_good" /><font size="2">undone phrasing</font></br>
+                                        
+                                    </td>
+                                </tr> 
+                                <tr>
+                                    <td style="background-color:DarkGray ;">
+                                        <input id="Judgment5_Bad" name="JudgmentRelevance1" type="radio" value="1_bad" />Relevence
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="background-color:LightSlateGray ;">
+                                        &nbsp&nbsp<input id="Judgment5_Bad1" name="Judgment5" type="radio" value="1_badfluency" /><font size="2">cover the whole article</font></br>
+                                        &nbsp&nbsp<input id="Judgment5_Bad2" name="Judgment5" type="radio" value="1_notrelevant" /><font size="2">cover part of the article</font></br>
+                                        &nbsp&nbsp<input id="Judgment5_Bad3" name="Judgment5" type="radio" value="1_notuseful" /><font size="2">not relevant</font></br>
+                                        
+                                    </td>
+                                </tr>
+                            </ol>
+                        </table>
+                    </td>
+                </tr>
+				<tr id="tableRow6">
+                    <td>
+                        <div style="margin-top:15px;">
+                            <table align="left">
+                                <tr>
+                                    <td>
+                                        &nbsp&nbsp<a id="docTitle1" target="_blank">{first_sen_first200char}</a>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </td>
+                    <td>
+                        <table border="0" cellspacing="0" style="width: 100%; height: 100%;" cellpadding="10">
+                            <ol>
+                                <tr>
+									<td style="background-color:LightGray;">
+										<input id="Judgment6_Good" name="JudgmentRelevance1" type="radio" value="1_good" />Readable
+									</td>
+								</tr>
+								<tr>
+									<td style="background-color:LightSlateGray ;">
+                                        &nbsp&nbsp<input id="Judgment6_Good" name="Judgment6" type="radio" value="1_good" /><font size="2">Yes</font></br>
+                                        &nbsp&nbsp<input id="Judgment6_Good" name="Judgment6" type="radio" value="1_good" /><font size="2">bad grammar</font></br>
+                                        &nbsp&nbsp<input id="Judgment6_Good" name="Judgment6" type="radio" value="1_good" /><font size="2">undone phrasing</font></br>
+                                        
+                                    </td>
+                                </tr> 
+                                <tr>
+                                    <td style="background-color:DarkGray ;">
+                                        <input id="Judgment6_Bad" name="JudgmentRelevance1" type="radio" value="1_bad" />Relevence
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="background-color:LightSlateGray ;">
+                                        &nbsp&nbsp<input id="Judgment6_Bad1" name="Judgment6" type="radio" value="1_badfluency" /><font size="2">cover the whole article</font></br>
+                                        &nbsp&nbsp<input id="Judgment6_Bad2" name="Judgment6" type="radio" value="1_notrelevant" /><font size="2">cover part of the article</font></br>
+                                        &nbsp&nbsp<input id="Judgment6_Bad3" name="Judgment6" type="radio" value="1_notuseful" /><font size="2">not relevant</font></br>
+                                        
+                                    </td>
+                                </tr>
+                            </ol>
+                        </table>
+                    </td>
+                </tr>
+				<tr id="tableRow7">
+                    <td>
+                        <div style="margin-top:15px;">
+                            <table align="left">
+                                <tr>
+                                    <td>
+                                        &nbsp&nbsp<a id="docTitle1" target="_blank">{zaki_result_200char}</a>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </td>
+                    <td>
+                        <table border="0" cellspacing="0" style="width: 100%; height: 100%;" cellpadding="10">
+                            <ol>
+                                <tr>
+									<td style="background-color:LightGray;">
+										<input id="Judgment7_Good" name="JudgmentRelevance1" type="radio" value="1_good" />Readable
+									</td>
+								</tr>
+								<tr>
+									<td style="background-color:LightSlateGray ;">
+                                        &nbsp&nbsp<input id="Judgment7_Good" name="Judgment7" type="radio" value="1_good" /><font size="2">Yes</font></br>
+                                        &nbsp&nbsp<input id="Judgment7_Good" name="Judgment7" type="radio" value="1_good" /><font size="2">bad grammar</font></br>
+                                        &nbsp&nbsp<input id="Judgment7_Good" name="Judgment7" type="radio" value="1_good" /><font size="2">undone phrasing</font></br>
+                                        
+                                    </td>
+                                </tr> 
+                                <tr>
+                                    <td style="background-color:DarkGray ;">
+                                        <input id="Judgment7_Bad" name="JudgmentRelevance1" type="radio" value="1_bad" />Relevence
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="background-color:LightSlateGray ;">
+                                        &nbsp&nbsp<input id="Judgment7_Bad1" name="Judgment7" type="radio" value="1_badfluency" /><font size="2">cover the whole article</font></br>
+                                        &nbsp&nbsp<input id="Judgment7_Bad2" name="Judgment7" type="radio" value="1_notrelevant" /><font size="2">cover part of the article</font></br>
+                                        &nbsp&nbsp<input id="Judgment7_Bad3" name="Judgment7" type="radio" value="1_notuseful" /><font size="2">not relevant</font></br>
+                                        
+                                    </td>
+                                </tr>
+                            </ol>
+                        </table>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <script type="text/javascript">
+        var JudgeRelevanceAndCategory = function () {
+            return {
+                Validate: function () {
+				//alert('v1 JudgeRelevanceAndCategory false');
+					
+                    var count = 0;
+                    var bestCount = 0;
+                    var radioNameArray = ["JudgmentRelevance1", "JudgmentRelevance2", "JudgmentRelevance3", "JudgmentRelevance4", "JudgmentRelevance5","JudgmentRelevance6","JudgmentRelevance7"];
+                    for (var i = 0; i < radioNameArray.length; i++) {
+                        var rd = $('input[name=' + radioNameArray[i] +']:checked');
+                        if (rd.length == 1) {
+                            count++;
+                        }
+						var idx = i+1;
+                        if ($('#Judgment' + idx + '_Good').prop('checked')) {
+                            bestCount++;
+                        }
+                    }
+					
+                    if (bestCount != 1) {
+                        var result = 'You have chosen ' + bestCount + ' answers for Best, you should only choose 1 answer for Best';
+                        alert(result);
+                        return false;
+                    }
+
+                    if (count != radioNameArray.length) {
+                        var result = 'You have chosen ' + count + ' answers for Best/Bad';
+                        alert(result + '. Please select all of ' + radioNameArray.length + ' answers.');
+                        return false;
+                    }
+                    for (var i = 1; i <= radioNameArray.length; i++){
+                        if ($('#Judgment' + i + '_Bad').prop('checked')){
+                            var rd = $('input[name=Judgment' + i +']:checked');
+                            if (rd.length == 0){
+                                alert('You have chosen Bad for summary '+ i + ' but have not chosen the reason.');
+                                return false;
+                            }
+                            if ($('#Judgment' + i + '_Bad4').prop('checked') && $('#comment_bad_'+i).val() == ""){
+                                alert('You have chosen Others for summary ' + i + ' but have not left any comment. Please leave your comment.' );
+                                return false;
+                            }
+                        }
+
+                    }
+                    //xPlate_SetJudgmentDataInt(bitResult);
+                    return true;
+                }
+            };
+        }();
+        </script>
+		
+        
+
+    </div>
+	<input onclick="top.xPlate.saveAndForward();" value="Submit" type="button" class="button" />
+</body>
+</html>
